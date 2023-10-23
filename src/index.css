@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Sans+3:wght@400;600;700&display=swap");
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.app {
+  display: flex;
+  position: relative;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.fc-list-day-cushion {
+  background: linear-gradient(
+    195deg,
+    rgb(73, 163, 241),
+    rgb(26, 115, 232)
+  ) !important;
+}
+
+@media screen and (max-width: 767px) {
+  .fc-toolbar.fc-header-toolbar {
+    flex-direction: column;
+    order: 2;
+  }
+  .fc-toolbar-chunk {
+    display: table-row;
+    text-align: center;
+    padding: 5px 0;
+  }
+  .fc {
+    flex-direction: column-reverse;
+  }
+}
+
+
