@@ -2,7 +2,7 @@ import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import {
   Box,
@@ -13,16 +13,17 @@ import {
   Paper,
   Stack,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import {
-  DateSelectArg,
   EventApi,
   EventClickArg,
   formatDate,
 } from "@fullcalendar/core/index.js";
 import DeleteEventModal from "../modals/DeleteEventModal";
 import AddEventModal from "../modals/AddEventModal";
+import { randomId } from "@mui/x-data-grid-generator";
 
 const CalendarEvents = () => {
   const theme = useTheme();
@@ -32,23 +33,24 @@ const CalendarEvents = () => {
   );
   const [isDeleteEventDialogOpen, setIsDeleteEventDialogOpen] = useState(false);
   const [isAddEventDialogOpen, setAddEventDialogOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
+  const [selectedDate, setSelectedDate] = useState<DateClickArg | null>(null);
 
-  const handleDateClick = (selected: DateSelectArg) => {
-    setSelectedDate(selected);
+  const isLargeMobile = useMediaQuery("(max-width:600px)");
+
+  const handleDateClick = (info: DateClickArg) => {
+    setSelectedDate(info);
     setAddEventDialogOpen(true);
   };
-
   const handleAddEvent = (title: string) => {
     const calendarApi = selectedDate?.view.calendar;
     calendarApi?.unselect();
 
     if (title && selectedDate) {
+      const id = randomId();
       calendarApi?.addEvent({
-        id: `${selectedDate.start}-${title}`,
+        id: id,
         title: title,
-        start: selectedDate.startStr,
-        end: selectedDate.endStr,
+        start: selectedDate.dateStr,
         allDay: selectedDate.allDay,
       });
     }
@@ -89,7 +91,6 @@ const CalendarEvents = () => {
           sx={{
             flexShrink: 0,
             width: { xs: "100%", md: "20%" },
-            p: "15px 0 15px 15px",
             maxHeight: { md: "calc(75vh + 30px)" },
             minHeight: { md: "calc(75vh + 30px)" },
           }}
@@ -102,7 +103,7 @@ const CalendarEvents = () => {
               overflowY: "auto",
               overflowX: "hidden",
               maxHeight: { md: "calc(100% - 40px)" },
-              pr: "15px",
+              p: "15px",
             }}
           >
             <List>
@@ -148,7 +149,6 @@ const CalendarEvents = () => {
             </List>
           </Box>
         </Paper>
-
         <Box
           flexGrow={1}
           sx={{
@@ -170,14 +170,19 @@ const CalendarEvents = () => {
               headerToolbar={{
                 left: "prev,next today",
                 center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+                right: `${
+                  isLargeMobile
+                    ? "dayGridMonth,timeGridDay,listMonth"
+                    : "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+                }`,
               }}
               initialView="dayGridMonth"
+              selectLongPressDelay={200}
               editable={true}
               selectable={true}
               selectMirror={true}
               dayMaxEvents={true}
-              select={handleDateClick}
+              dateClick={handleDateClick}
               eventClick={handleEventClick}
               eventsSet={handleEvents}
               initialEvents={[
@@ -190,7 +195,7 @@ const CalendarEvents = () => {
                   id: "5123",
                   title: "Timed event",
                   date:
-                    new Date().toISOString().replace(/T.*$/, "") + "T12:00:00",
+                    new Date().toISOString().replace(/T.*$/, "") + "T24:00:00",
                 },
               ]}
             />
@@ -201,6 +206,7 @@ const CalendarEvents = () => {
         isOpen={isDeleteEventDialogOpen}
         onClose={handleCloseModal}
         onConfirm={handleConfirmDelete}
+        title="event"
       />
       <AddEventModal
         open={isAddEventDialogOpen}

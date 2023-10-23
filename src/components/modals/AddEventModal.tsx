@@ -15,11 +15,7 @@ type AddEventModalProps = {
   onConfirm: (title: string) => void;
 };
 
-const AddEventModal = ({
-  open,
-  onClose,
-  onConfirm,
-}: AddEventModalProps) => {
+const AddEventModal = ({ open, onClose, onConfirm }: AddEventModalProps) => {
   const [eventTitle, setEventTitle] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -46,9 +42,10 @@ const AddEventModal = ({
       maxWidth="sm"
       PaperProps={{
         sx: {
-          borderRadius: "8px", // Adjust the border radius as needed
+          borderRadius: "8px",
         },
       }}
+      sx={{ zIndex: 9999 }}
     >
       <DialogTitle variant="h3" color="secondary">
         Event Title
@@ -69,10 +66,15 @@ const AddEventModal = ({
         />
       </DialogContent>
       <DialogActions sx={{ mr: 2 }}>
-        <Button variant="contained" color="primary" onClick={onClose} >
+        <Button variant="contained" color="primary" onClick={onClose}>
           Cancel
         </Button>
-        <Button variant="contained" onClick={handleConfirm} color="success" sx={{color:"grey.100"}}>
+        <Button
+          variant="contained"
+          onClick={handleConfirm}
+          color="success"
+          sx={{ color: "grey.100" }}
+        >
           Confirm
         </Button>
       </DialogActions>

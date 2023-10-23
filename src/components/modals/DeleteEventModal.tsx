@@ -11,11 +11,13 @@ type DeleteEventModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  title:string
 };
 const DeleteEventModal = ({
   isOpen,
   onClose,
   onConfirm,
+  title,
 }: DeleteEventModalProps) => {
   return (
     <Dialog
@@ -24,11 +26,12 @@ const DeleteEventModal = ({
       maxWidth="sm"
       open={isOpen}
       onClose={onClose}
+      sx={{ zIndex: 9999 }}
     >
       <DialogTitle variant="h3" color="secondary">
         Confirm
       </DialogTitle>
-      <DialogContent>Are you sure you want to delete the event?</DialogContent>
+      <DialogContent>Are you sure you want to delete the {title} ?</DialogContent>
       <DialogActions>
         <Button variant="contained" color="primary" onClick={onClose}>
           Cancel

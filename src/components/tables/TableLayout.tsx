@@ -132,13 +132,21 @@ const TableLayout = ({ mockData, columns }: TablePops) => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          py: 2,
+          py: { xs: 1, sm: 2 },
           px: { xs: 1, sm: 2 },
-          flexDirection: "row-reverse",
+          flexDirection: { xs: "column", sm: "row" },
           flexWrap: "nowrap",
+          gap: { xs: 1, sm: 0 },
         }}
       >
-        <Box display="flex" gap={2}>
+        <GridToolbarQuickFilter />
+        <Box
+          display="flex"
+          gap={{ xs: 0, sm: 2 }}
+          justifyContent={{ xs: "space-between", sm: "end" }}
+          width="100%"
+          pb={{ xs: 1, sm: 0 }}
+        >
           <Button
             startIcon={<AddIcon fontSize="small" />}
             onClick={handleClick}
@@ -148,7 +156,6 @@ const TableLayout = ({ mockData, columns }: TablePops) => {
           </Button>
           <GridToolbarExport />
         </Box>
-        <GridToolbarQuickFilter />
       </GridToolbarContainer>
     );
   }
@@ -243,7 +250,7 @@ const TableLayout = ({ mockData, columns }: TablePops) => {
             backgroundColor: `${theme.palette.background.default}`,
             p: "3px",
             borderRadius: 2,
-            width: { xs: "50%", sm: "auto" },
+            width: { xs: "100%", sm: "auto" },
           },
           display: "grid",
           gridAutoColumns: "1fr",
@@ -272,6 +279,7 @@ const TableLayout = ({ mockData, columns }: TablePops) => {
         />
       </Box>
       <DeleteEventModal
+        title="user"
         isOpen={isDeleteConfirmationOpen}
         onClose={closeDeleteConfirmation}
         onConfirm={handleConfirmDelete}
