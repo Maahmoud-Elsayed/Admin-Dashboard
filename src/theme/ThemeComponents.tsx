@@ -13,8 +13,8 @@ const drawerWidth = 220;
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen / 1.5,
+    easing: theme.transitions.easing.easeOut,
+    duration: theme.transitions.duration.enteringScreen / 2,
   }),
   overflowX: "hidden",
   [theme.breakpoints.down("sm")]: {
@@ -28,8 +28,8 @@ const openedMixin = (theme: Theme): CSSObject => ({
 
 const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen / 1.5,
+    easing: theme.transitions.easing.easeOut,
+    duration: theme.transitions.duration.leavingScreen / 2,
   }),
   overflowX: "hidden",
   [theme.breakpoints.up("sm")]: {
@@ -77,15 +77,15 @@ export const AppBar = styled(MuiAppBar, {
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen / 1.5,
+    easing: theme.transitions.easing.easeOut,
+    duration: theme.transitions.duration.leavingScreen / 2,
   }),
   ...(open && {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen / 1.5,
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen / 2,
     }),
   }),
   [theme.breakpoints.down("sm")]: {

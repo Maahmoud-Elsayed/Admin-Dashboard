@@ -17,6 +17,7 @@ export const getDesignTokens = (mode: PaletteMode) => {
             },
             text: {
               primary: "#ffffffcc",
+              secondary: "#FFFFFF",
             },
             purple: {
               main: "#800080",
@@ -53,7 +54,7 @@ export const getDesignTokens = (mode: PaletteMode) => {
     components: {
       MuiPaper: {
         defaultProps: {
-          variant: "outlined",
+          variant: "outlined" as const,
         },
         styleOverrides: {
           root: {
