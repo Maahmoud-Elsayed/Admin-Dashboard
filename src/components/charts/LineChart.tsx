@@ -62,7 +62,7 @@ const LineChart = ({ isDashboard = false }: LineChartProps) => {
       margin={{
         top: isDashboard || isLargeMobile ? 25 : 50,
         right: isDashboard || isLargeMobile ? 25 : 110,
-        bottom: isLargeMobile ? 100 : 50,
+        bottom: isLargeMobile && !isDashboard ? 100 : 50,
         left: isDashboard || isLargeMobile ? 45 : 60,
       }}
       xScale={{ type: "point" }}

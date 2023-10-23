@@ -7,7 +7,7 @@ type PieChartProps = {
 };
 
 const PieChart = ({ isDashboard = false }: PieChartProps) => {
-    const isLargeMobile = useMediaQuery("(max-width:600px)");
+  const isLargeMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
   return (
     <ResponsivePie
@@ -106,8 +106,8 @@ const PieChart = ({ isDashboard = false }: PieChartProps) => {
                 direction: isLargeMobile ? "column" : "row",
                 justify: false,
                 translateX: isLargeMobile ? 40 : 0,
-                translateY: isLargeMobile ? 0 : 56,
-                itemsSpacing: 0,
+                translateY: isLargeMobile ? 50 : 56,
+                itemsSpacing: isLargeMobile ? 15 : 0,
                 itemWidth: 100,
                 itemHeight: 18,
                 itemTextColor: "#999",
