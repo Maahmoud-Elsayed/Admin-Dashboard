@@ -235,7 +235,7 @@ const NavBar = ({ open, handleDrawer }: NavBarProps) => {
                     <Avatar
                       alt="Profile Picture"
                       src="https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
-                      sx={{ mt: "-4px" }}
+                      sx={{ width: 32, height: 32, mt: "-3px" }}
                     />
                   }
                   divider={false}
