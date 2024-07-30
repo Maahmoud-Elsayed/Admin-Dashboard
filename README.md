@@ -1,3 +1,3 @@
 # React-Admin-Dashboard
 
-Admin Panel Dashoard built using React , Typescript and Material UI
+Admin Panel Dashboard built using React , Typescript and Material UI
